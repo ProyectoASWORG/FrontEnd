@@ -1,53 +1,117 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import GoogleLogin from 'react-google-login';
+import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import { GoogleResponse } from '../models/GoogleResponse';
+import { AuthContext } from '../context/auth/context';
 import env from 'react-dotenv';
+import auth_service from '../services/auth_service';
+import { loginUserWithGoogle, logOut } from '../context/auth/reducer';
+import { User } from '../models/User';
+import './navbar.css';
 
 const Ul = styled.ul`
     display: flex;
+    justify-content: space-between;
+    margin-bottom:0px;
+`
+const NavItem = styled.div`
+    display: flex;
+`
+const Nav = styled.nav`
+    background-color:#ff6600;
 `
 const Li = styled.li`
+    display:flex;
+    align-items:center;
     list-style: none;
     margin: 1em;
 `
 
 function NavBar() {
 
+    const { dispatch, state } = useContext(AuthContext);
 
-    const responseGoogle = (response:any) => {
-        setToken(response);
+    const responseGoogle = async (response:any) => {
+        await auth_service.loginWithGoogle(response.tokenId);
+        dispatch(loginUserWithGoogle(auth_service.getUser()));
     }
-    const [token, setToken] = useState<GoogleResponse>();
+
+    const loggout = () => {
+        dispatch(logOut());
+        setUser(null);
+    }
+
+    const [user, setUser] = useState<User|null>(null);   
+
+    useEffect(()=>{
+        console.log(state.isAuthenticated)
+        setUser(auth_service.getUser());
+    },[state.isAuthenticated]);
+
+    useEffect(()=>{},[user])
 
     return (
         <>
-            <nav>
+            <Nav>
                 <Ul>
-                    <Li>
-                        <Link to="/">Home</Link>
-                    </Li>
-                    <Li>
-                        <GoogleLogin
-                            clientId={env.GOOGLE_CLIENT_ID}
-                            buttonText="Login" 
-                            onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
-                            cookiePolicy={'single_host_origin'}
-                            isSignedIn={true}
-                        />
-                    </Li>
+                    <NavItem>
+                        <Li>
+                            <Link to="/">Home</Link>
+                        </Li>
+                        <Li>
+                            <Link to="/news">News</Link>
+                        </Li>
+                        <Li>
+                            <Link to="/threads">Threads</Link>
+                        </Li>
+                        <Li>
+                            <p>Past</p>
+                        </Li>
+                        <Li>
+                            <p>Comments</p>
+                        </Li>
+                        <Li>
+                            <Link to="/ask">Ask</Link>
+                        </Li>
+                        <Li>
+                            <p>Show</p>
+                        </Li>
+                        <Li>
+                            <p>Jobs</p>
+                        </Li>
+                        <Li>
+                            <Link to="/submit">Submit</Link>
+                        </Li>
+                    </NavItem>
+                    
+                    <NavItem>
+                        {
+                            user ? 
+                            <Li className="nav-user">
+                                <p>{user.full_name}({user.karma})</p>
+                                <GoogleLogout
+                                    clientId={env.GOOGLE_CLIENT_ID}
+                                    buttonText="Logout"
+                                    onLogoutSuccess={loggout}
+                                    className='loggout-button'
+                                />
+                            </Li>
+                            :
+                            <Li className="nav-user">
+                                <GoogleLogin
+                                    clientId={env.GOOGLE_CLIENT_ID}
+                                    buttonText="Login"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    className="loggin-button"
+                                />
+                            </Li>
+                        }
+                    </NavItem>
+                    
                 </Ul>
-            </nav>
-
-            {
-                token 
-                ?
-                <p>{token.tokenId}</p>
-                :
-                null
-            }
+            </Nav>
         </>
     )
 }

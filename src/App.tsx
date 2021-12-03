@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useEffect, useReducer } from 'react';
 import { 
   BrowserRouter as Router,
   Route,
@@ -5,24 +7,45 @@ import {
 } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
+import { AuthContext } from './context/auth/context';
+import { authReducer, loggedIn } from './context/auth/reducer';
+import { initialState } from './context/auth/state';
+import { jwtInterceptor } from './interceptors/jwtInterceptor';
+import { User } from './models/User';
 import Contributions from './pages/contributions/Contributions';
+import auth_service from './services/auth_service';
+import styled from 'styled-components';
 
+const Body = styled.body`
+  margin: 1em;
+`
+const Container = styled.div`
+  padding: 1em;
+  background-color: #f6f6ef;
+`
 
 function App() {
+
+  jwtInterceptor();
+
+  const [state, dispatch] = useReducer(authReducer, initialState);
+  useEffect(()=>{
+    dispatch(loggedIn());
+  },[])
   return (
-    <div>
-      <header>
-        <h1>Hacker News!</h1>
-      </header>
-      <body>
+    <AuthContext.Provider value={{state, dispatch}}>
+      <Body>
         <Router>
           <NavBar></NavBar>
-          <Routes>
-            <Route path="/" element={<Contributions/>}></Route>
-          </Routes>
+
+          <Container>
+            <Routes>
+                <Route path="/" element={<Contributions/>}></Route>
+            </Routes>
+          </Container>
         </Router>
-      </body>
-    </div>
+      </Body>
+    </AuthContext.Provider>
   );
 }
 
