@@ -9,14 +9,26 @@ import auth_service from '../services/auth_service';
 import { loginUserWithGoogle, logOut } from '../context/auth/reducer';
 import { User } from '../models/User';
 import './navbar.css';
+import logo from '../assets/images/logo.gif';
 
 const Ul = styled.ul`
     display: flex;
     justify-content: space-between;
     margin-bottom:0px;
+    padding: 0px;
 `
 const NavItem = styled.div`
     display: flex;
+    & li {
+        margin:0px;
+        padding: 5px 15px 5px 15px;
+        border-left: 1px solid black;
+    }
+
+    & li: nth-child(2),
+    & li:first-child {
+        border-left: none;
+    }
 `
 const Nav = styled.nav`
     background-color:#ff6600;
@@ -57,7 +69,10 @@ function NavBar() {
                 <Ul>
                     <NavItem>
                         <Li>
-                            <Link to="/">Home</Link>
+                            <Link to="/"><img src={logo} alt="logo" className="logoImage" /></Link>
+                        </Li>
+                        <Li>
+                            <Link to="/" style={{fontWeight: "bold"}}>Haker News</Link>
                         </Li>
                         <Li>
                             <Link to="/news">News</Link>

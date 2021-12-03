@@ -4,3 +4,4 @@ p{margin:0px;}
 .loggin-button div,.loggout-button div{display:none;}
 .loggin-button,.loggout-button{color:black !important; cursor:pointer !important; box-shadow:none !important; background:none !important; margin-left:5px !important;}
 .loggin-button > span,.loggout-button > span{padding:0px !important;}
+.logoImage{border:1px solid white;}
