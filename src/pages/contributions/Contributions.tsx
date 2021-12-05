@@ -1,21 +1,22 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/auth/context';
+import React, { Dispatch, FC, useContext, useEffect, useReducer, useState } from 'react';
 import { FilterType } from '../../enums/FilterType';
-import { Contribution } from '../../models/Contribution';
-import auth_service from '../../services/auth_service';
-import contributions_service from '../../services/contributions_service';
 import ContributionList from './Components/contributionList';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getContributionsAction } from '../../redux/contributions/contributionActions';
+import { ContributionState } from '../../redux/contributions/contributionTypes';
 
 const Contributions: FC<{type: FilterType}> = ({type}) => {
 
-    const [contributions, setContributions] = useState<Contribution[]>([]);
+    const dispatch = useDispatch();
+    const contributions = useSelector((state: ContributionState)=> state.contributions);
 
     useEffect(()=>{
-        contributions_service.getContributions(type)
-            .then(contributions => {setContributions(contributions);})
-            .catch(err => console.log(err));
-    },[type])    
+        dispatch(getContributionsAction(type));
+    },[type, dispatch])    
+
+    useEffect(()=>{
+        console.log(`Lista de contribuciones: ${contributions}`);
+    },[contributions])
 
 
     return(

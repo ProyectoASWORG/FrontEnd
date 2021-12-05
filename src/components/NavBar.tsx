@@ -45,7 +45,7 @@ function NavBar() {
     const { dispatch, state } = useContext(AuthContext);
 
     const responseGoogle = async (response:any) => {
-        await auth_service.loginWithGoogle(response.tokenId);
+        await auth_service.loginWithGoogle(response.tokenId)
         dispatch(loginUserWithGoogle(auth_service.getUser()));
     }
 

@@ -21,6 +21,18 @@ class ContributionsService {
             .then(contributions => {return contributions.data})
             .catch(error => {console.log(error);})
     }
+
+    public vote = async (id:string) =>{
+        return await axios.put(`${env.API_URL}/contributions/${id}/like`)
+            .then(res => console.log(res))
+            .catch(error => {console.log(error);})
+    }
+
+    public unvote = async (id:string) =>{
+        return await axios.put(`${env.API_URL}/contributions/${id}/dislike`)
+            .then(res => console.log(res))
+            .catch(error => {console.log(error);})
+    }
 }
 
 export default new ContributionsService();

@@ -9,8 +9,7 @@ export enum ActionType{
 }
 
 export interface LogInWithGoogle {
-    type: ActionType.LogInWithGoogle;
-    payload:User|null;
+
 }
 
 export interface LogOut {

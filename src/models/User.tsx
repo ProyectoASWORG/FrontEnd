@@ -11,4 +11,5 @@ export interface User{
     updated_at: Date;
     full_name: string;
     id:string;
+    voted_contribution_ids:string[];
 }

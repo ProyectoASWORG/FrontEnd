@@ -3,6 +3,7 @@ import { Contribution } from '../../../models/Contribution';
 import ContributionItem from './contributionItem';
 
 const ContributionList: FC<{contributions: Contribution[]}> = ({contributions}) =>{
+  
   return (
       <>
         {

@@ -7,3 +7,5 @@
 .contribution-title{display:grid;grid-template-columns:auto 1fr;align-items:center;}
 .contribution-title a{text-decoration: none;color:black;}
 .contribution-title p{color:gray;font-size:8pt;margin-left: 5px;}
+.inactive{visibility: hidden;}
+.pointer{cursor:pointer;}
