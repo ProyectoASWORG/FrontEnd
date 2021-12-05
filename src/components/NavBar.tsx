@@ -57,7 +57,6 @@ function NavBar() {
     const [user, setUser] = useState<User|null>(null);   
 
     useEffect(()=>{
-        console.log(state.isAuthenticated)
         setUser(auth_service.getUser());
     },[state.isAuthenticated]);
 

@@ -2,7 +2,7 @@
 .contribution-index{margin-right:5px;color:gray;}
 .contribution-arrow{cursor:pointer;}
 .contribution-text{display:grid;}
-.contribution-info{display:flex;color:gray;font-size:8pt;}
+.contribution-info{display:flex;align-items:center;color:gray;font-size:8pt;}
 .contribution-info p{margin:2px;}
 .contribution-title{display:grid;grid-template-columns:auto 1fr;align-items:center;}
 .contribution-title a{text-decoration: none;color:black;}
