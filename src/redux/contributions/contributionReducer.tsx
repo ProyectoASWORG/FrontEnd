@@ -10,8 +10,6 @@ const contributionReducer = (
     state: ContributionState = initialState,
     action: ContributionAction
 ): ContributionState => {
-    console.log(action.type)
-    console.log(action.payload)
     switch (action.type) {
         case GET_CONTRIBUTIONS:
             console.log('GET_CONTRIBUTIONS', action.payload);

@@ -8,7 +8,7 @@ import { AuthContext } from '../../../context/auth/context';
 import TimeAgo from 'react-timeago';
 import env from 'react-dotenv';
 import contributions_service from '../../../services/contributions_service';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateContributionAction } from '../../../redux/contributions/contributionActions';
 
 const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ contribution, index }) => {
@@ -16,6 +16,7 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
   const [creator, setCreator] = useState<User | null>(null);
   const { state } = useContext(AuthContext);
   const dispatch = useDispatch();
+  const isSignedIn = useSelector((state:any)=> state.auth.isSignedIn);
 
   useEffect(()=>{
     setCurrentUser(state.user);

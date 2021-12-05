@@ -4,6 +4,7 @@ import { User } from "../models/User";
 
 class AuthService {
     public loginWithGoogle = async (token:string): Promise<User> => {
+        console.log(token)
         const user = await axios.post(`${env.API_URL}/auth/sign_in`, null,
             {
                 headers: {
@@ -28,7 +29,6 @@ class AuthService {
 
     public getUser = (): User | null  =>{
         let user = localStorage.getItem("User")|| "{}";
-        console.log(user)
         if(user && user !== "undefined"){
             return JSON.parse(user) as User;
         }

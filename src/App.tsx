@@ -17,6 +17,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import contributionReducer from './redux/contributions/contributionReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { masterReducer } from './redux/reducers';
 
 const Body = styled.body`
   margin: 1em;
@@ -36,7 +37,7 @@ function App() {
     dispatch(loggedIn());
   },[])
 
-  const store = createStore(contributionReducer, composeWithDevTools(applyMiddleware(thunk)));
+  const store = createStore(masterReducer, composeWithDevTools(applyMiddleware(thunk)));
 
   return (
     <Provider store={store}>

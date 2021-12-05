@@ -3,12 +3,11 @@ import { FilterType } from '../../enums/FilterType';
 import ContributionList from './Components/contributionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContributionsAction } from '../../redux/contributions/contributionActions';
-import { ContributionState } from '../../redux/contributions/contributionTypes';
 
 const Contributions: FC<{type: FilterType}> = ({type}) => {
 
     const dispatch = useDispatch();
-    const contributions = useSelector((state: ContributionState)=> state.contributions);
+    const contributions = useSelector((state: any)=> state.contribution.contributions);
 
     useEffect(()=>{
         dispatch(getContributionsAction(type));
