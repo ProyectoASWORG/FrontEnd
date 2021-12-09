@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import contributionReducer from './redux/contributions/contributionReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { masterReducer } from './redux/reducers';
+import Users from './pages/users/Users';
 
 const Body = styled.body`
   margin: 1em;
@@ -50,6 +51,7 @@ function App() {
                   <Route path="/" element={<Contributions type={FilterType.URL}/>}></Route>
                   <Route path="/news" element={<Contributions type={FilterType.NEWS}/>}></Route>
                   <Route path="/ask" element={<Contributions type={FilterType.ASK}/>}></Route>
+                  <Route path="/user/:id" element={<Users/>}></Route>
               </Routes>
             </Container>
           </Router>

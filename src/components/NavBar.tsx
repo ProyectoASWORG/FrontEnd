@@ -111,7 +111,7 @@ function NavBar() {
                         {
                             user ? 
                             <Li className="nav-user">
-                                <p>{user.full_name}({user.karma})</p>
+                                <Link to = {`user/${user.id}`} >{user.full_name}({user.karma})</Link> 
                                 <GoogleLogout
                                     clientId={env.GOOGLE_CLIENT_ID}
                                     buttonText="Logout"
