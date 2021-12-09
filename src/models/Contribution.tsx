@@ -8,4 +8,5 @@ export interface Contribution {
     points:number;
     contribution_type:string;
     id:string;
+    comment_count: number;
 }

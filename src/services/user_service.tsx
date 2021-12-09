@@ -8,5 +8,9 @@ class UserService{
             .then(response => response.data.user)
             .catch(error => console.log(error));
     }
+
+    public updateUser = async (user: User|null) => {
+        localStorage.setItem("User", JSON.stringify(user));
+    }
 }
 export default new UserService();

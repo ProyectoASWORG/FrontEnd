@@ -10,6 +10,10 @@ import { loginUserWithGoogle, logOut } from '../context/auth/reducer';
 import { User } from '../models/User';
 import './navbar.css';
 import logo from '../assets/images/logo.gif';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUserAction, logoutUserAction, setUserAction } from '../redux/user/userActions';
+import user_service from '../services/user_service';
+import { current } from '@reduxjs/toolkit';
 
 const Ul = styled.ul`
     display: flex;
@@ -42,26 +46,29 @@ const Li = styled.li`
 
 function NavBar() {
 
-    const { dispatch, state } = useContext(AuthContext);
+
+    const dispatch = useDispatch();
+
+    const user = useSelector((state:any) => state.auth.user )
 
     const responseGoogle = async (response:any) => {
-        await auth_service.loginWithGoogle(response.tokenId);
-        dispatch(loginUserWithGoogle(auth_service.getUser()));
+        dispatch(loginUserAction(response.tokenId));
     }
 
     const loggout = () => {
-        dispatch(logOut());
-        setUser(null);
+        dispatch(logoutUserAction());
     }
 
-    const [user, setUser] = useState<User|null>(null);   
+    useEffect(()=>{console.log(user)},[user])
 
     useEffect(()=>{
-        console.log(state.isAuthenticated)
-        setUser(auth_service.getUser());
-    },[state.isAuthenticated]);
+        let currentUser = auth_service.getUser();
+        if(currentUser){
+            console.log(currentUser)
+            dispatch(setUserAction(currentUser));
+        }
+    },[dispatch])
 
-    useEffect(()=>{},[user])
 
     return (
         <>

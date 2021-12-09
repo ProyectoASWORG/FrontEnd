@@ -4,7 +4,7 @@ import auth_service from "../../services/auth_service";
 import { ActionType, AuthActions, LoggedIn, LogInWithGoogle, LogOut } from "./actions";
 import { AuthState } from "./state";
 
-export function authReducer(state: AuthState, action: AuthActions): AuthState {
+export function authReducer(state: AuthState, action: any): AuthState {
     switch (action.type){
         case ActionType.LogInWithGoogle:
             return {

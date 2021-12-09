@@ -4,7 +4,8 @@ import AuthService from '../services/auth_service';
 export function jwtInterceptor(){
     axios.interceptors.request.use(request => {
         const user = AuthService.getUser();
-        if(user){
+        console.log(request?.headers?.Authorization!==undefined);
+        if(user && request?.headers?.Authorization === undefined){
             request.headers = {
                 Authorization: `Bearer ${user.token}`
             }
