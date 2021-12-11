@@ -11,6 +11,11 @@ import { useLocation, useParams } from 'react-router';
 const Users: FC = () => {
 
     const {id} = useParams();
+    
+    const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+    const isSignedIn = useSelector((state:any)=> state.auth.isSignedIn);
+
 
     return(
         <>
