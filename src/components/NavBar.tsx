@@ -85,7 +85,7 @@ function NavBar() {
                             <Link to="/news">News</Link>
                         </Li>
                         <Li>
-                            <Link to="/threads">Threads</Link>
+                            <Link to= "/threads">Threads</Link>
                         </Li>
                         <Li>
                             <p>Past</p>
