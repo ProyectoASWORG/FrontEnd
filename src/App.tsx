@@ -53,7 +53,7 @@ function App() {
                   <Route path="/news" element={<Contributions type={FilterType.NEWS}/>}></Route>
                   <Route path="/ask" element={<Contributions type={FilterType.ASK}/>}></Route>
                   <Route path="/user/:id" element={<Users/>}></Route>
-                  <Route path="/threads" element={<Comments/>}></Route>
+                  <Route path="/threads/:id" element={<Comments type={FilterType.USERCOMMENTS}/>}></Route>
               </Routes>
             </Container>
           </Router>

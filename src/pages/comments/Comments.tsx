@@ -5,16 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCommentsAction } from '../../redux/comments/commentActions';
 import { useParams } from 'react-router';
 
-const Comments = () => {
+const Comments: FC<{type: FilterType}> = ({type})=> {
     const user = useSelector((state:any) => state.auth.user )
 
-    const id = user.id; 
+    const {id} = useParams(); 
     
     const dispatch = useDispatch();
     const comments = useSelector((state: any)=> state.comment.comments);
 
     useEffect(()=>{
-        dispatch(getCommentsAction(id));
+        if(id)
+            dispatch(getCommentsAction(id, type));
     },[id, dispatch])    
 
     useEffect(()=>{

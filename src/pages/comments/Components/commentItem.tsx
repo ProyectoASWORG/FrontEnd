@@ -6,9 +6,8 @@ import user_service from '../../../services/user_service';
 import { AuthContext } from '../../../context/auth/context';
 import TimeAgo from 'react-timeago';
 import env from 'react-dotenv';
-import contributions_service from '../../../services/contributions_service';
+import './commentItem.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateContributionAction } from '../../../redux/contributions/contributionActions';
 
 const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -36,11 +35,12 @@ const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
             <span className="c-orange m-5">*</span>
             <p className="c-gray m-5">{comment.points} points</p>
             <p className="c-gray m-5">by {creator?.full_name}</p>
-            <p className="c-gray m-5">  {comment.created_at} ago </p>
+            <TimeAgo date={comment.created_at}></TimeAgo>
+            {console.log(comment.contribution_title)}
+            <p className="c-gray m-5">on: {comment.contribution_title}</p>
         </div>
         <div className="reply-link">
             <p className="font-sm">{ comment.text }</p>
-            <small> reply </small>
         </div>
     </div>
             

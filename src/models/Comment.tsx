@@ -7,4 +7,5 @@ export interface Comment {
     contribution_id:string;
     points:number;
     id:string;
+    contribution_title:string;
 }

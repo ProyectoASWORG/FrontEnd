@@ -5,8 +5,8 @@ import { Comment } from "../models/Comment";
 
 class CommentsService {
     
-    public getUserComments = async (id:string): Promise<Comment[]> =>{
-        return await axios.get(`${env.API_URL}/comments/${id}/show_comments.json`)
+    public getUserComments = async (id:string, type:FilterType): Promise<Comment[]> =>{
+        return await axios.get(`${env.API_URL}/comments/${id}/${type}`)
         .then(comments => {return comments.data})
         .catch(error => {console.log(error);})
     }

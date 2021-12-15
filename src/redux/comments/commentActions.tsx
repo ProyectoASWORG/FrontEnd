@@ -3,11 +3,11 @@ import { Comment } from "../../models/Comment";
 import comments_service from "../../services/comments_service";
 import { DispatchType } from "./commentTypes";
 
-export function getCommentsAction(id:string){
+export function getCommentsAction(id:string, type:FilterType){
     console.log("getCommentsAction")
     return async (dispatch: DispatchType) => {
         try{
-            const comments = await comments_service.getUserComments(id) as Comment[];
+            const comments = await comments_service.getUserComments(id,type) as Comment[];
             console.log(comments)
             dispatch(getComments(comments));
         }catch(e){
