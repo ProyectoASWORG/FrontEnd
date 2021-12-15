@@ -11,91 +11,82 @@ import UserForm from './Components/userForm';
 
 const Users: FC = () => {
 
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
+    
     const {id} = useParams();
-    const [creator, setCreator] = useState<User | null>(null);
-    const { state } = useContext(AuthContext);
-    const isSignedIn = useSelector((state:any)=> state.auth.isSignedIn);
+    const {isSignedIn, user} = useSelector((state:any)=> state.auth);
+    const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-    useEffect(()=>{
-        setCurrentUser(state.user)
-      },[state.user])
+    useEffect(() => {
+        if (id)
+            user_service.getUser(id).then(user => setCurrentUser(user))
+    }, [])
 
-    useEffect(()=>{user_service.updateUser(currentUser)},[currentUser])
+    useEffect(() => {
 
-    useEffect(()=>{
-        setCurrentUser(state.user);
-        if(id) user_service.getUser(id).then(user=>setCreator(user))
-        },[])
+    }, [currentUser])
 
 
     const sameUser = () => {
-        return (currentUser?.id === id)
+        return (user?.id == id)
     }
 
     return(
         <>
             {
-            creator?
+            currentUser?
             <div>
                 <div className='comun'>
-                <table>
-                    <tr>
-                        <td className='c-gray' valign="top"> user:</td> 
-                        <td className='c-gray'> {creator?.full_name}</td>
-                    </tr>
-                    <tr>
-                        <td className='c-gray' valign="top"> created:</td> 
-                        <td className='c-gray'> 
-                            {
-                                creator?
-                                <TimeAgo date={creator.created_at}></TimeAgo>
-                                :null
-                            }
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='c-gray' valign="top"> karma:</td> 
-                        <td className='c-gray'> {creator?.karma}</td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                {
-                sameUser()?
-                <div className='auth'>
+                    <table>
+                        <tr>
+                            <td className='c-gray' valign='top'> user:</td> 
+                            <td className='c-gray' valign='top'> {currentUser?.full_name}</td>
+                        </tr>
+                        <tr>
+                            <td className='c-gray' valign='top'> created:</td> 
+                            <td className='c-gray' valign='top'> 
+                                {
+                                    currentUser?
+                                    <TimeAgo date={currentUser.created_at}></TimeAgo>
+                                    :null
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='c-gray' valign='top'> karma:</td> 
+                            <td className='c-gray' valign='top'> {currentUser?.karma}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
                     {
-                        creator?
-                        <UserForm users={creator}></UserForm>
-                        :
-                        <></>
+                    sameUser()?
+                    <div className='auth'>
+                            <UserForm user={user}></UserForm>
+                    </div>
+                    :
+                    <div className='simple'>
+                        <table className='table'>
+                        
+                        <tr>
+                            <td className='c-gray' valign='top'> about:</td> 
+                            <td className='c-gray' valign='top'> {currentUser?.about}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td className='link' valign='top'> submissions</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td className='link' valign='top'> comments</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td className='link' valign='top'> favorites</td>
+                        </tr>
+                    </table>
+                    </div>
                     }
-                    
                 </div>
-                :
-                <div className='simple'>
-                    <table className='table'>
-                    
-                    <tr>
-                        <td className='c-gray' valign="top"> about:</td> 
-                        <td className='c-gray'> {creator?.about}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td className='link'> submissions</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td className='link'> comments</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td className='link'> favorites</td>
-                    </tr>
-                </table>
-                </div>
-                }
-            </div>
             </div>
             :
             <></>

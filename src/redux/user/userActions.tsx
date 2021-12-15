@@ -1,6 +1,7 @@
 import { User } from "../../models/User";
 import auth_service from "../../services/auth_service";
-import { LOGIN_USER, LOGOUT_USER, SET_USER } from "./actionTypes";
+import user_service from "../../services/user_service";
+import { LOGIN_USER, LOGOUT_USER, SET_USER, UPDATE_USER } from "./actionTypes";
 import { DispatchType } from "./userTypes";
 
 export function loginUserAction(token: string){
@@ -45,3 +46,25 @@ export const setUserAction = (user: User) =>({
     type: SET_USER,
     payload: user
 })
+
+
+const updateUser = (user: User) => ({
+    type: UPDATE_USER,
+    payload: user
+})
+
+
+export function updateUserAction(user: User){
+    return async (dispatch: DispatchType) => {
+        try{
+            console.log("updateUserAction");
+            await user_service.updateUser(user);
+            dispatch(updateUser(user));
+        }catch(e){
+            console.log(e);
+            return e;
+        }
+    }
+}
+
+
