@@ -6,10 +6,7 @@ import { DispatchType } from "./userTypes";
 export function loginUserAction(token: string){
     return async (dispatch: DispatchType) => {
         try{
-            console.log("loginUserAction");
             const user = await auth_service.loginWithGoogle(token) as User; 
-            console.log(user)
-            console.log(token)
             dispatch(loginUser(user));
         }catch(e){
             console.log(e);
@@ -26,7 +23,6 @@ const loginUser = (user: User) => ({
 export function logoutUserAction(){
     return async (dispatch: DispatchType) => {
         try{
-            console.log("logoutUserAction");
             await auth_service.logOut();
             dispatch(logoutUser());
         }catch(e){
