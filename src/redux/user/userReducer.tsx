@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER, SET_USER } from "./actionTypes";
+import { LOGIN_USER, LOGOUT_USER, SET_USER, UPDATE_USER } from "./actionTypes";
 import { UserAction, UserState } from "./userTypes";
 
 const initialState: UserState = {
@@ -24,6 +24,12 @@ const userReducer = (
                 isSignedIn: false
             }
         case SET_USER:
+            return{
+                ...state, 
+                user: action.payload,
+                isSignedIn: true
+            }
+        case UPDATE_USER:
             return{
                 ...state, 
                 user: action.payload,

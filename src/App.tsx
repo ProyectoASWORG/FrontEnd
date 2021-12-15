@@ -51,7 +51,7 @@ function App() {
                   <Route path="/" element={<Contributions type={FilterType.URL}/>}></Route>
                   <Route path="/news" element={<Contributions type={FilterType.NEWS}/>}></Route>
                   <Route path="/ask" element={<Contributions type={FilterType.ASK}/>}></Route>
-                  <Route path="/user/:id" element={<Users/>}></Route>
+                  <Route path="/users/:id" element={<Users/>}></Route>
               </Routes>
             </Container>
           </Router>
