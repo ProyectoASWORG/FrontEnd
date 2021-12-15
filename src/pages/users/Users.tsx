@@ -4,10 +4,10 @@ import user_service from '../../services/user_service';
 import { User } from '../../models/User';
 import { AuthContext } from '../../context/auth/context';
 import TimeAgo from 'react-timeago';
-import env from 'react-dotenv';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
-import { link } from 'fs';
+import UserForm from './Components/userForm';
+
 
 const Users: FC = () => {
 
@@ -28,20 +28,18 @@ const Users: FC = () => {
         if(id) user_service.getUser(id).then(user=>setCreator(user))
         },[])
 
-    
-
 
     const sameUser = () => {
-        if(currentUser)
-            if(creator)
-                return (currentUser.id == creator.id)
+        return (currentUser?.id === id)
     }
-
 
     return(
         <>
-            <div className='userType'>
-                <table className='table'>
+            {
+            creator?
+            <div>
+                <div className='comun'>
+                <table>
                     <tr>
                         <td className='c-gray' valign="top"> user:</td> 
                         <td className='c-gray'> {creator?.full_name}</td>
@@ -60,35 +58,49 @@ const Users: FC = () => {
                         <td className='c-gray' valign="top"> karma:</td> 
                         <td className='c-gray'> {creator?.karma}</td>
                     </tr>
+                </table>
+            </div>
+            <div>
+                {
+                sameUser()?
+                <div className='auth'>
+                    {
+                        creator?
+                        <UserForm users={creator}></UserForm>
+                        :
+                        <></>
+                    }
+                    
+                </div>
+                :
+                <div className='simple'>
+                    <table className='table'>
+                    
                     <tr>
                         <td className='c-gray' valign="top"> about:</td> 
                         <td className='c-gray'> {creator?.about}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td className='link'> submissions
-                        </td>
+                        <td className='link'> submissions</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td className='link'> comments
-                        </td>
+                        <td className='link'> comments</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td className='link'> favorites
-                        </td>
+                        <td className='link'> favorites</td>
                     </tr>
                 </table>
-                <h1>Tipo de perfil: </h1>
-                {
-                    sameUser()?
-                    {}
-                    :
-                    {}
+                </div>
                 }
             </div>
-        </>
+            </div>
+            :
+            <></>
+            }
+        </>  
     )
 }
 
