@@ -7,6 +7,9 @@ import TimeAgo from 'react-timeago';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import UserForm from './Components/userForm';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 
 
 const Users: FC = () => {
@@ -29,6 +32,7 @@ const Users: FC = () => {
     const sameUser = () => {
         return (user?.id == id)
     }
+
 
     return(
         <>
@@ -73,15 +77,15 @@ const Users: FC = () => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> submissions</td>
+                            <td className='link' valign='top'> <Link to={`/`}>submissions</Link></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> comments</td>
+                            <td className='link' valign='top'> <Link to={`/`}>comments</Link></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> favorites</td>
+                            <td className='link' valign='top'> <Link to={`/`}>favorites</Link></td>
                         </tr>
                     </table>
                     </div>
