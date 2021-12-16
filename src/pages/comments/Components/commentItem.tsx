@@ -8,6 +8,7 @@ import TimeAgo from 'react-timeago';
 import env from 'react-dotenv';
 import './commentItem.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -37,7 +38,7 @@ const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
             <p className="c-gray m-5">by {creator?.full_name}</p>
             <TimeAgo date={comment.created_at}></TimeAgo>
             {console.log(comment.contribution_title)}
-            <p className="c-gray m-5">on: {comment.contribution_title}</p>
+            <p className="c-gray m-5">on:<Link to={`/detailedCon/${comment.contribution_id}`}> {comment.contribution_title} </Link> </p>
         </div>
         <div className="reply-link">
             <p className="font-sm">{ comment.text }</p>
