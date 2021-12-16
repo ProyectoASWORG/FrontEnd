@@ -85,7 +85,7 @@ function NavBar() {
                             <Link to="/news">News</Link>
                         </Li>
                         <Li>
-                            <Link to="/threads">Threads</Link>
+                            {user ? <Link to={`/threads/${user.id}`}> Threads</Link>: "Threads"}
                         </Li>
                         <Li>
                             <p>Past</p>

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import React, {  useEffect, useReducer } from 'react';
 import { 
   BrowserRouter as Router,
   Route,
@@ -19,6 +19,7 @@ import contributionReducer from './redux/contributions/contributionReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { masterReducer } from './redux/reducers';
 import Users from './pages/users/Users';
+import Comments from './pages/comments/Comments';
 
 const Body = styled.body`
   margin: 1em;
@@ -51,7 +52,8 @@ function App() {
                   <Route path="/" element={<Contributions type={FilterType.URL}/>}></Route>
                   <Route path="/news" element={<Contributions type={FilterType.NEWS}/>}></Route>
                   <Route path="/ask" element={<Contributions type={FilterType.ASK}/>}></Route>
-                  <Route path="/users/:id" element={<Users/>}></Route>
+                  <Route path="/user/:id" element={<Users/>}></Route>
+                  <Route path="/threads/:id" element={<Comments type={FilterType.USERCOMMENTS}/>}></Route>
               </Routes>
             </Container>
           </Router>
