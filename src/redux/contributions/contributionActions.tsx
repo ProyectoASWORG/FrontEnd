@@ -4,11 +4,9 @@ import contributions_service from "../../services/contributions_service";
 import { DispatchType } from "./contributionTypes";
 
 export function getContributionsAction(type: FilterType){
-    console.log("getContributionsAction")
     return async (dispatch: DispatchType) => {
         try{
             const contributions = await contributions_service.getContributions(type) as Contribution[];
-            console.log(contributions)
             dispatch(getContributions(contributions));
         }catch(e){
             console.log(e);
