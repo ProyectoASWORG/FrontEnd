@@ -6,7 +6,6 @@ import user_service from '../../../services/user_service';
 import './contribution.css';
 import { AuthContext } from '../../../context/auth/context';
 import TimeAgo from 'react-timeago';
-import env from 'react-dotenv';
 import contributions_service from '../../../services/contributions_service';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateContributionAction } from '../../../redux/contributions/contributionActions';
@@ -14,17 +13,14 @@ import { updateContributionAction } from '../../../redux/contributions/contribut
 const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ contribution, index }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [creator, setCreator] = useState<User | null>(null);
-  const { state } = useContext(AuthContext);
+  const { user } = useSelector((state:any) => state.auth); 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    setCurrentUser(state.user);
-    user_service.getUser(contribution.user_id).then(user=>setCreator(user))
-  },[])
 
   useEffect(()=>{
-    setCurrentUser(state.user)
-  },[state.user])
+    setCurrentUser(user);
+    user_service.getUser(contribution.user_id).then(creator => setCreator(creator))
+  },[])
 
   useEffect(()=>{},[contribution])
 
@@ -34,10 +30,15 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
     if(currentUser){
       contributions_service.vote(contribution.id)
       .then((res) => {
+        let voted: string[];
+
+        voted = currentUser.voted_contribution_ids ? [...currentUser.voted_contribution_ids, contribution.id] : [contribution.id]
+
         setCurrentUser({
           ...currentUser,
-          voted_contribution_ids: [...currentUser.voted_contribution_ids, contribution.id]
+          voted_contribution_ids: voted 
         });
+
         contribution.points ++;
         dispatch(updateContributionAction(contribution));
       })
@@ -59,8 +60,8 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
   }
 
   const userVotedContribution = () => {
-    if(currentUser){
-      return currentUser?.voted_contribution_ids?.some(contribution_id=>contribution_id===contribution.id)
+    if(currentUser && currentUser?.voted_contribution_ids){
+      return currentUser?.voted_contribution_ids.some(contribution_id=>contribution_id===contribution.id)
     }
     return false;
   }

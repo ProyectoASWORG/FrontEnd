@@ -9,3 +9,14 @@
 .contribution-title p{color:gray;font-size:8pt;margin-left: 5px;}
 .inactive{visibility: hidden;}
 .pointer{cursor:pointer;}
+.field{display:flex;align-items:center;margin-bottom: 5px;}
+.field textarea,
+.field input{width:415px;}
+.margin-left{margin-left:35px;}
+.text{font-weight: bold;font-size:14px;}
+.text,
+.form-label{
+    width:3em;
+    font-size:12px;
+    color:gray;
+}
