@@ -1,11 +1,8 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { User } from '../../../models/User';
-import user_service from '../../../services/user_service';
-import { AuthContext } from '../../../context/auth/context';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router';
-import { useLinkClickHandler } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { updateUserAction } from '../../../redux/user/userActions'
+import { Link } from 'react-router-dom';
 
 const UserForm: FC<{user: User}> = ({user}) => {
 
@@ -63,7 +60,9 @@ const UserForm: FC<{user: User}> = ({user}) => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> upvoted submissions</td>
+                            <td className='link' valign='top'> 
+                                <Link to="/upvotedComments">upvoted submissions</Link>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>

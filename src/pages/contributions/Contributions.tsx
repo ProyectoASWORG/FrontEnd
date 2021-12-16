@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, useContext, useEffect, useReducer, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { FilterType } from '../../enums/FilterType';
 import ContributionList from './Components/contributionList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,13 +14,14 @@ const Contributions: FC<{type: FilterType}> = ({type}) => {
     },[type, dispatch])    
 
     useEffect(()=>{
-        console.log(`Lista de contribuciones: ${contributions}`);
     },[contributions])
 
 
     return(
         <>
-           <ContributionList contributions={contributions}></ContributionList> 
+            {contributions ?
+                <ContributionList contributions={contributions}></ContributionList>:null 
+            }
         </>
     )
 }

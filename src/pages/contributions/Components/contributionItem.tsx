@@ -16,7 +16,6 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
   const [creator, setCreator] = useState<User | null>(null);
   const { state } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const isSignedIn = useSelector((state:any)=> state.auth.isSignedIn);
 
   useEffect(()=>{
     setCurrentUser(state.user);
@@ -61,8 +60,9 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
 
   const userVotedContribution = () => {
     if(currentUser){
-      return currentUser.voted_contribution_ids.some(contribution_id=>contribution_id===contribution.id)
+      return currentUser?.voted_contribution_ids?.some(contribution_id=>contribution_id===contribution.id)
     }
+    return false;
   }
 
   return (

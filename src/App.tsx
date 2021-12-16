@@ -10,6 +10,7 @@ import { authReducer, loggedIn } from './context/auth/reducer';
 import { initialState } from './context/auth/state';
 import { jwtInterceptor } from './interceptors/jwtInterceptor';
 import Contributions from './pages/contributions/Contributions';
+import SubmitContribution from './pages/contributions/Components/SubmitContribution'
 import styled from 'styled-components';
 import { FilterType } from './enums/FilterType';
 import { applyMiddleware, createStore } from 'redux';
@@ -51,7 +52,9 @@ function App() {
                   <Route path="/" element={<Contributions type={FilterType.URL}/>}></Route>
                   <Route path="/news" element={<Contributions type={FilterType.NEWS}/>}></Route>
                   <Route path="/ask" element={<Contributions type={FilterType.ASK}/>}></Route>
+                  <Route path="/upvotedComments" element={<Contributions type={FilterType.UPVOTEDCONTRIBUTIONS}/>}></Route>
                   <Route path="/users/:id" element={<Users/>}></Route>
+                  <Route path='/submit' element={<SubmitContribution/>}></Route>
               </Routes>
             </Container>
           </Router>
