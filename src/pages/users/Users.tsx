@@ -39,11 +39,11 @@ const Users: FC = () => {
                     <table>
                         <tr>
                             <td className='c-gray' valign='top'> user:</td> 
-                            <td className='c-gray' valign='top'> {currentUser?.full_name}</td>
+                            <td valign='top'> {currentUser?.full_name}</td>
                         </tr>
                         <tr>
                             <td className='c-gray' valign='top'> created:</td> 
-                            <td className='c-gray' valign='top'> 
+                            <td valign='top'> 
                                 {
                                     currentUser?
                                     <TimeAgo date={currentUser.created_at}></TimeAgo>
@@ -53,7 +53,7 @@ const Users: FC = () => {
                         </tr>
                         <tr>
                             <td className='c-gray' valign='top'> karma:</td> 
-                            <td className='c-gray' valign='top'> {currentUser?.karma}</td>
+                            <td valign='top' className='c-gray'> {currentUser?.karma}</td>
                         </tr>
                     </table>
                 </div>
@@ -69,7 +69,7 @@ const Users: FC = () => {
                         
                         <tr>
                             <td className='c-gray' valign='top'> about:</td> 
-                            <td className='c-gray' valign='top'> {currentUser?.about}</td>
+                            <td valign='top'> {currentUser?.about}</td>
                         </tr>
                         <tr>
                             <td></td>
