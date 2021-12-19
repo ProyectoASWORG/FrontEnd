@@ -85,7 +85,7 @@ function NavBar() {
                             <Link to="/news">News</Link>
                         </Li>
                         <Li>
-                            <Link to="/threads">Threads</Link>
+                            {user ? <Link to={`/threads/${user.id}`}> Threads</Link>: "Threads"}
                         </Li>
                         <Li>
                             <p>Past</p>
@@ -111,7 +111,7 @@ function NavBar() {
                         {
                             user ? 
                             <Li className="nav-user">
-                                <Link to = {`users/${user.id}`} >{user.full_name}({user.karma})</Link> 
+                                <Link to = {`user/${user?.id}`} >{user?.full_name}({user?.karma})</Link> 
                                 <GoogleLogout
                                     clientId={env.GOOGLE_CLIENT_ID}
                                     buttonText="Logout"

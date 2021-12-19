@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 import { User } from '../../../models/User';
 import { useDispatch } from 'react-redux';
 import { updateUserAction } from '../../../redux/user/userActions'
+import './user.css'
 import { Link } from 'react-router-dom';
 
 const UserForm: FC<{user: User}> = ({user}) => {
@@ -33,30 +34,46 @@ const UserForm: FC<{user: User}> = ({user}) => {
                     </tr>
                     <tr>
                         <td className='c-gray' valign= "top"> <label> showdead: </label></td>
+                        <td valign="top"> 
+                        {
+                            currentUser.show_dead?
+                            <p>yes</p>
+                            :
+                            <p>no</p>
+                        }
+                        </td>
 
                     </tr>
                     <tr>
                         <td className='c-gray' valign= "top"> <label> noprocrast: </label></td>
+                        <td valign="top"> 
+                        {
+                            currentUser.no_procrast?
+                            <p>yes</p>
+                            :
+                            <p>no</p>
+                        }
+                        </td>
                     </tr>
                     <tr>
                         <td className='c-gray' valign= "top"> <label> maxvisit: </label></td>
-                        <td valign= "top"> <input type="text" size={20} value={currentUser?.max_visit} name='email' onChange={onChangeForm}></input></td>
+                        <td valign= "top"> <input type="text" size={20} value={currentUser?.max_visit} name='max_visit' onChange={onChangeForm}></input></td>
                     </tr>
                     <tr>
                         <td className='c-gray' valign= "top"> <label> minaway: </label></td>
-                        <td valign= "top"> <input type="text" size={20} value={currentUser?.min_away} name='email' onChange={onChangeForm}></input></td>
+                        <td valign= "top"> <input type="text" size={20} value={currentUser?.min_away} name='min_away' onChange={onChangeForm}></input></td>
                     </tr>
                     <tr>
                         <td className='c-gray' valign= "top"> <label> delay: </label></td>
-                        <td valign= "top"> <input type="text" size={20} value={currentUser?.delay} name='email' onChange={onChangeForm}></input></td>
+                        <td valign= "top"> <input type="text" size={20} value={currentUser?.delay} name='delay' onChange={onChangeForm}></input></td>
                     </tr>
                     <tr>
                             <td></td>
-                            <td className='link' valign='top'> submissions</td>
+                            <td className='link' valign='top'> <Link to={`/`}>submissions</Link></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> comments</td>
+                            <td className='link' valign='top'> <Link to={`/threads/${currentUser?.id}`}>comments</Link></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -66,7 +83,7 @@ const UserForm: FC<{user: User}> = ({user}) => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> upvoted comments</td>
+                            <td className='link' valign='top'> <Link to={`/`}>upvoted comments</Link></td>
                         </tr>
                     <tr>
                         <br></br>
