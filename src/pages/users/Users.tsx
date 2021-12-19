@@ -81,7 +81,7 @@ const Users: FC = () => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> <Link to={`/threads/${currentUser.id}`}> comments</Link></td>
+                            <td className='link' valign='top'> <Link to={`/threads/${currentUser?.id}`}> comments</Link></td>
                         </tr>
                         <tr>
                             <td></td>
