@@ -50,11 +50,8 @@ function NavBar() {
     const dispatch = useDispatch();
 
     const user = useSelector((state:any) => state.auth.user )
-    console.log(user);
-    console.log(env.GOOGLE_CLIENT_ID);
 
     const responseGoogle = async (response:any) => {
-        console.log(response);
         dispatch(loginUserAction(response.tokenId));
     }
 
@@ -62,11 +59,10 @@ function NavBar() {
         dispatch(logoutUserAction());
     }
 
-    useEffect(()=>{console.log(user)},[user])
+    useEffect(()=>{},[user])
 
     useEffect(()=>{
         let currentUser = auth_service.getUser();
-        console.log(currentUser);
         if(currentUser){
             dispatch(setUserAction(currentUser));
         }

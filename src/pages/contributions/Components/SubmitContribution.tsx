@@ -67,6 +67,7 @@ const SubmitContribution: FC = () => {
 
         if(errores.length === 0){
             let res = await contributions_service.create(contribution);
+            console.log(res);
             setErrors([]);
             navigate("/news");
         }else{

@@ -9,6 +9,7 @@ import TimeAgo from 'react-timeago';
 import contributions_service from '../../../services/contributions_service';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateContributionAction } from '../../../redux/contributions/contributionActions';
+import { Link } from 'react-router-dom';
 
 const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ contribution, index }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -92,7 +93,7 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
         <div className="contribution-info">
           <p>{contribution.points} points</p>
           <p>by</p>
-          <p>{creator?.full_name}</p>
+          <Link to={`/user/${creator?.id}`}>{creator?.full_name}</Link>
           <TimeAgo date={contribution.created_at}></TimeAgo>
           {
             userVotedContribution() ?

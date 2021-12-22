@@ -49,7 +49,7 @@ class ContributionsService {
 
     public create = async (contribution: Contribution) => {
         return await axios.post(`${env.API_URL}/contributions.json`, contribution)
-            .then(res => res.data)
+            .then(res => {console.log(res);return res.data;})
             .catch(error => error)
 
     }
