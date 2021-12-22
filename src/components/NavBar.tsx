@@ -53,6 +53,7 @@ function NavBar() {
     console.log(user);
 
     const responseGoogle = async (response:any) => {
+        console.log(response);
         dispatch(loginUserAction(response.tokenId));
     }
 
@@ -64,6 +65,7 @@ function NavBar() {
 
     useEffect(()=>{
         let currentUser = auth_service.getUser();
+        console.log(currentUser);
         if(currentUser){
             dispatch(setUserAction(currentUser));
         }
