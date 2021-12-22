@@ -1,4 +1,4 @@
 window.env = {
   "GOOGLE_CLIENT_ID": "96715383090-50irgv29hlto877g5aijk5085cdocbce.apps.googleusercontent.com",
-  "API_URL": "http://localhost:3000"
+  "API_URL": "https://testaswapplication.herokuapp.com"
 };
