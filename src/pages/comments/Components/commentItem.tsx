@@ -38,10 +38,17 @@ const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
             <p className="c-gray m-5">by {creator?.full_name}</p>
             <TimeAgo date={comment.created_at}></TimeAgo>
             {console.log(comment.contribution_title)}
-            <p className="c-gray m-5">on:<Link to={`/detailedCon/${comment.contribution_id}`}> {comment.contribution_title} </Link> </p>
+            <p className="c-gray m-5">on:
+              <Link to={`/detailedCon/${comment.contribution_id}`}> {comment.contribution_title} </Link>
+            </p>
         </div>
         <div className="reply-link">
             <p className="font-sm">{ comment.text }</p>
+        </div>
+        <div className="reply-link">
+          <p className="font-sm">
+            <Link className="c-gray" to={`/reply/${comment.id}/${comment.contribution_id}/${creator?.full_name}/${comment.text}/${comment.created_at}`}> reply </Link>
+          </p>
         </div>
     </div>
             
