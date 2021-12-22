@@ -109,7 +109,7 @@ function NavBar() {
                     
                     <NavItem>
                         {
-                            user ? 
+                            user?.id ? 
                             <Li className="nav-user">
                                 <Link to = {`user/${user?.id}`} >{user?.full_name}({user?.karma})</Link> 
                                 <GoogleLogout
