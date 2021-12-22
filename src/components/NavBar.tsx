@@ -51,6 +51,7 @@ function NavBar() {
 
     const user = useSelector((state:any) => state.auth.user )
     console.log(user);
+    console.log(env.GOOGLE_CLIENT_ID);
 
     const responseGoogle = async (response:any) => {
         console.log(response);
