@@ -1,8 +1,9 @@
 import React,{ FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Comment } from "../../../models/Comment";
+import { addCommentsAction } from "../../../redux/comments/commentActions";
 import commentReducer from "../../../redux/comments/commentReducer";
 import comments_service from "../../../services/comments_service";
 
@@ -22,7 +23,11 @@ const P = styled.p`
     const CreateComment: FC<{contributionId:string, replayedCommentId:string}> = ({contributionId, replayedCommentId}) => {
         const navigate = useNavigate();
 
+        const dispatch = useDispatch();
+
         const currentUser = useSelector((state:any) => state.auth.user);
+        const reduComments = useSelector((state: any)=> state.comment.comments);
+
     
         const [comment, setComment] = useState<Comment | null | any>({
             text: "",
@@ -52,10 +57,8 @@ const P = styled.p`
                 ...comment,
                 [e.target.name]: e.target.value
             })
-        }
+        }    
 
-        console.log(comment.user_id);
-    
         useEffect(()=>{console.log(errors)},[errors])
     
         const onSubmit = async (e: any) =>{
@@ -69,9 +72,10 @@ const P = styled.p`
             console.log(comment);
     
             if(errores.length === 0){
-                let res = await comments_service.create(comment);
+                dispatch(addCommentsAction(comment));
                 setErrors([]);
                 navigate(`/detailedCon/${contributionId}`);
+                console.log(reduComments);
             }else{
                 setErrors(errores);
             }

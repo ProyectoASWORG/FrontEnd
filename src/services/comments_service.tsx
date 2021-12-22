@@ -11,9 +11,9 @@ class CommentsService {
         .catch(error => {console.log(error);})
     }
 
-    public create = async (comment: Comment) => {
+    public create = async (comment: Comment):Promise<Comment> => {
         return await axios.post(`${env.API_URL}/comments.json`, comment)
-            .then(res => res.data)
+            .then(res => {return res.data})
             .catch(error => error)
 
     }

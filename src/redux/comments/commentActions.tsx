@@ -8,7 +8,6 @@ export function getCommentsAction(id:string, type:FilterType){
     return async (dispatch: DispatchType) => {
         try{
             const comments = await comments_service.getUserComments(id,type) as Comment[];
-            console.log(comments)
             dispatch(getComments(comments));
         }catch(e){
             console.log(e);
@@ -20,6 +19,26 @@ export function getCommentsAction(id:string, type:FilterType){
 
 const getComments = (payload: Comment|Comment[]) =>({
     type: "GET_COMMENTS",
+    payload: payload
+})
+
+export function addCommentsAction(comment: Comment){
+    console.log("addCommentsAction")
+    return async (dispatch: DispatchType) => {
+        try{
+            const newComment = await comments_service.create(comment) as Comment;
+            console.log(newComment)
+            dispatch(addComments(newComment));
+        }catch(e){
+            console.log(e);
+            return e;
+        }
+        
+    }
+}
+
+const addComments = (payload: Comment|Comment[]) =>({
+    type: "ADD_COMMENTS",
     payload: payload
 })
 

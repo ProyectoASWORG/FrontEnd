@@ -1,5 +1,5 @@
 import { Comment } from "../../models/Comment";
-import { GET_COMMENTS, UPDATE_COMMENT } from "./actionTypes";
+import { ADD_COMMENT, GET_COMMENTS, UPDATE_COMMENT } from "./actionTypes";
 import { CommentAction, CommentState } from "./commentTypes";
 
 const initialState: CommentState = {
@@ -25,6 +25,13 @@ const commentReducer = (
                     if(comment.id === commentPayload.id) return commentPayload 
                     return comment
                 })  
+            }
+        case ADD_COMMENT:
+            let addCommentPayload = action.payload as Comment
+          
+            return {
+                ...state,
+                comments: [...state.comments, addCommentPayload]
             }
         default:
             return state;

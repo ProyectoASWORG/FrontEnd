@@ -22,8 +22,6 @@ const DetailedContribution:FC  = ()=> {
             contributions_service.getContribution(id).then(contrib=> setCurrentContrib(contrib));
     },[])    
 
-    console.log(currentContrib);
-
     const dispatch = useDispatch();
     const comments = useSelector((state: any)=> state.comment.comments);
 
