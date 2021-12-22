@@ -29,7 +29,8 @@ class AuthService {
 
     public getUser = (): User | null  =>{
         let user = localStorage.getItem("User")|| "{}";
-        if(user && user !== "undefined"){
+        console.log(user)
+        if(user && user !== "undefined" && user !== "{}"){
             return JSON.parse(user) as User;
         }
         return null;
