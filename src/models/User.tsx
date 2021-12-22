@@ -12,4 +12,5 @@ export interface User{
     full_name: string;
     id:string;
     voted_contribution_ids:string[];
+    voted_comment_ids:string[];
 }

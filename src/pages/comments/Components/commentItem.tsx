@@ -9,6 +9,8 @@ import env from 'react-dotenv';
 import './commentItem.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import comments_service from '../../../services/comments_service';
+import { updateCommentAction } from '../../../redux/comments/commentActions';
 
 const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -30,14 +32,69 @@ const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
   
     useEffect(()=>{user_service.updateUser(currentUser)},[currentUser])
 
+    const voteComment = () =>{
+      if(currentUser){
+        comments_service.vote(comment.id)
+        .then((res) => {
+          let voted: string[];
+  
+          voted = currentUser.voted_comment_ids ? [...currentUser.voted_comment_ids, comment.id] : [comment.id]
+  
+          setCurrentUser({
+            ...currentUser,
+            voted_comment_ids: voted 
+          });
+          console.log(currentUser.voted_comment_ids);
+          comment.points ++;
+          dispatch(updateCommentAction(comment));
+        })
+      }
+    }
+  
+    const unvoteComment = () =>{
+      if(currentUser){
+        comments_service.unvote(comment.id)
+        .then(res => {
+          setCurrentUser({
+            ...currentUser,
+            voted_comment_ids: currentUser.voted_comment_ids.filter(id => id !== comment.id) 
+          });
+          comment.points --;
+          dispatch(updateCommentAction(comment));
+        });
+      }
+    }
+  
+    const userVotedComment = () => {
+      if(currentUser && currentUser?.voted_comment_ids){
+        return currentUser?.voted_comment_ids.some(comment_id=>comment_id===comment.id)
+      }
+      return false;
+    }
+
+
+
+
+
     return (
         <div >
         <div className="comment-item-container font-sm">
-            <span className="c-orange m-5">*</span>
+        {
+          (currentUser?.id === creator?.id) ?
+            <span className="c-orange">*</span>
+          :
+            <img src={arrow} alt="arrow" 
+              className={`contribution-arrow ${userVotedComment() ? "inactive" : ""}`} onClick={voteComment}/>
+        }
             <p className="c-gray m-5">{comment.points} points</p>
             <p className="c-gray m-5">by</p>
             <Link to={`/user/${creator?.id}`}>{creator?.full_name}&nbsp;</Link>
             <TimeAgo date={comment.created_at}></TimeAgo>
+            {
+            userVotedComment() ?
+            <p onClick={unvoteComment} className="pointer"> unvote</p>
+            :null
+          }
             <p className="c-gray m-5">on:<Link to={`/detailedCon/${comment.contribution_id}`}> {comment.contribution_title} </Link> </p>
         </div>
         <div className="reply-link">

@@ -17,6 +17,17 @@ class CommentsService {
             .catch(error => error)
 
     }
+    public vote = async (id:string) =>{
+        return await axios.put(`${env.API_URL}/comments/${id}/like`)
+            .then(res => console.log(res))
+            .catch(error => {console.log(error);})
+    }
+
+    public unvote = async (id:string) =>{
+        return await axios.put(`${env.API_URL}/comments/${id}/dislike`)
+            .then(res => console.log(res))
+            .catch(error => {console.log(error);})
+    }
 
 }
 

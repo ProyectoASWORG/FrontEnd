@@ -1,11 +1,13 @@
 
 li{list-style: none;}
 a{text-decoration: none;}
-p{margin:0px;}
+p{margin:5px;}
 .c-gray{color: gray !important}
 .c-orange{color: orange !important}
 .m-5{margin: 5px;}
 .font-sm{font-size:11px;}
+.contribution-arrow{cursor:pointer;}
+.pointer{cursor:pointer;}
 
 
 .comment-item {

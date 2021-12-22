@@ -42,7 +42,7 @@ const addComments = (payload: Comment|Comment[]) =>({
     payload: payload
 })
 
-export function updatecommentAction(comment: Comment){
+export function updateCommentAction(comment: Comment){
     return async (dispatch: DispatchType) => {
         try{
             dispatch(updatecomment(comment));
