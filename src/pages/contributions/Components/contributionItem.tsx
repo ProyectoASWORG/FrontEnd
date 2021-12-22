@@ -9,6 +9,7 @@ import TimeAgo from 'react-timeago';
 import contributions_service from '../../../services/contributions_service';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateContributionAction } from '../../../redux/contributions/contributionActions';
+import { Link } from 'react-router-dom';
 
 const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ contribution, index }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -101,9 +102,9 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
           }
           {
             contribution.comment_count===0 ?
-              <p>discuss</p>        
+              <p> <Link to={`/detailedCon/${contribution.id}`}> discuss </Link> </p>        
             :
-              <p>{contribution.comment_count} comments</p>
+              <p><Link to={`/detailedCon/${contribution.id}`}>  {contribution.comment_count} comments </Link> </p>
           }
         </div>
       </div>

@@ -10,6 +10,7 @@ import '../contributions/Components/contribution.css'
 
 import ContributionItem from '../contributions/Components/contributionItem';
 import { useParams } from 'react-router';
+import CreateComment from './Components/CreateComment';
 
 const DetailedContribution:FC  = ()=> {
     const {id} = useParams();
@@ -30,6 +31,9 @@ const DetailedContribution:FC  = ()=> {
         if(id)
             dispatch(getCommentsAction(id, FilterType.CONCOMMENTS));
     },[id, dispatch])  
+
+    useEffect(()=>{
+    },[comments])
    
 
 
@@ -53,6 +57,7 @@ const DetailedContribution:FC  = ()=> {
                             <p className="c-gray"> {currentContrib.text} </p> 
                         </div>
                     </div> 
+                    <CreateComment contributionId={`${currentContrib.id}`} replayedCommentId=''></CreateComment>
                     <CommentsList comments={comments}></CommentsList> 
                     </>
                 :
