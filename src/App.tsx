@@ -57,6 +57,7 @@ function App() {
                   <Route path='/submit' element={<SubmitContribution/>}></Route>
                   <Route path="/user/:id" element={<Users/>}></Route>
                   <Route path="/threads/:id" element={<Comments type={FilterType.USERCOMMENTS}/>}></Route>
+                  <Route path="/comments/:id/reply" ></Route>
               </Routes>
             </Container>
           </Router>
