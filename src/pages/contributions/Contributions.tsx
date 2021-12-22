@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { FilterType } from '../../enums/FilterType';
 import ContributionList from './Components/contributionList';
 import { useDispatch, useSelector } from 'react-redux';

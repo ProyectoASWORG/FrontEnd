@@ -102,9 +102,9 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
           }
           {
             contribution.comment_count===0 ?
-              <p>discuss</p>        
+              <p> <Link to={`/detailedCon/${contribution.id}`}> discuss </Link> </p>        
             :
-              <p>{contribution.comment_count} comments</p>
+              <p><Link to={`/detailedCon/${contribution.id}`}>  {contribution.comment_count} comments </Link> </p>
           }
         </div>
       </div>

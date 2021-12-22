@@ -11,6 +11,13 @@ class CommentsService {
         .catch(error => {console.log(error);})
     }
 
+    public create = async (comment: Comment) => {
+        return await axios.post(`${env.API_URL}/comments.json`, comment)
+            .then(res => res.data)
+            .catch(error => error)
+
+    }
+
 }
 
 export default new CommentsService();

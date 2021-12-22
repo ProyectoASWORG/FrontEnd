@@ -21,6 +21,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { masterReducer } from './redux/reducers';
 import Users from './pages/users/Users';
 import Comments from './pages/comments/Comments';
+import DetailedContribution from './pages/comments/DetailedContribution';
 
 const Body = styled.body`
   margin: 1em;
@@ -57,7 +58,7 @@ function App() {
                   <Route path='/submit' element={<SubmitContribution/>}></Route>
                   <Route path="/user/:id" element={<Users/>}></Route>
                   <Route path="/threads/:id" element={<Comments type={FilterType.USERCOMMENTS}/>}></Route>
-                  <Route path="/comments/:id/reply" ></Route>
+                  <Route path= "/detailedCon/:id" element={<DetailedContribution/>}></Route>
               </Routes>
             </Container>
           </Router>

@@ -35,6 +35,18 @@ class ContributionsService {
             .catch(error => {console.log(error);})
     }
 
+
+    public getContribution = async (id:string): Promise<Contribution> =>{
+        return await axios.get(`${env.API_URL}/contributions/${id}.json`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+        ).then(contributions => {return contributions.data})
+        .catch(error => {console.log(error);})
+    }
+
     public vote = async (id:string) =>{
         return await axios.put(`${env.API_URL}/contributions/${id}/like`)
             .then(res => console.log(res))
