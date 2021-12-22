@@ -50,7 +50,6 @@ function NavBar() {
     const dispatch = useDispatch();
 
     const user = useSelector((state:any) => state.auth.user )
-    console.log(user);
 
     const responseGoogle = async (response:any) => {
         dispatch(loginUserAction(response.tokenId));
@@ -60,7 +59,7 @@ function NavBar() {
         dispatch(logoutUserAction());
     }
 
-    useEffect(()=>{console.log(user)},[user])
+    useEffect(()=>{},[user])
 
     useEffect(()=>{
         let currentUser = auth_service.getUser();
@@ -109,7 +108,7 @@ function NavBar() {
                     
                     <NavItem>
                         {
-                            user ? 
+                            user?.id ? 
                             <Li className="nav-user">
                                 <Link to = {`user/${user?.id}`} >{user?.full_name}({user?.karma})</Link> 
                                 <GoogleLogout
