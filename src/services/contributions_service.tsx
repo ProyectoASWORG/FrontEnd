@@ -25,6 +25,10 @@ class ContributionsService {
             let id = auth_service.getUser()?.id;
             url = `${env.API_URL}/contributions/${id}/show_upvoted_contributions.json`;
         }
+        else if (filter === FilterType.USERCONTRIBUTIONS){
+            let id = auth_service.getUser()?.id;
+            url = `${env.API_URL}/contributions/${id}/show_user.json`; 
+        }
         else url = `${env.API_URL}/contributions${filter}`;
         return url;
     }
