@@ -27,8 +27,8 @@ export function addCommentsAction(comment: Comment){
     return async (dispatch: DispatchType) => {
         try{
             const newComment = await comments_service.create(comment) as Comment;
-            console.log(newComment)
-            dispatch(addComments(newComment));
+            console.log(comment)
+            dispatch(addComments(comment));
         }catch(e){
             console.log(e);
             return e;

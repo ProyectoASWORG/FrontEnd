@@ -56,3 +56,29 @@ p{margin:5px;}
 .reply-link{
     padding-left:2em;
 }
+
+.detailedCon-info{
+    display:flex;
+    color:gray;
+    font-size:8pt;
+}
+
+
+.detailedCon-title{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    align-items:center;
+}
+
+.detailedCon-text{
+    display:grid;
+}
+
+.detailedCon{
+    display:grid;
+    grid-template-columns: auto 1fr;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+}

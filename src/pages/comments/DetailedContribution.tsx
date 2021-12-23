@@ -11,16 +11,30 @@ import '../contributions/Components/contribution.css'
 import ContributionItem from '../contributions/Components/contributionItem';
 import { useParams } from 'react-router';
 import CreateComment from './Components/CreateComment';
+import { User } from '../../models/User';
+import user_service from '../../services/user_service';
+import { Link } from 'react-router-dom';
 
 const DetailedContribution:FC  = ()=> {
     const {id} = useParams();
     
    const [currentContrib, setCurrentContrib] = useState<Contribution | null>(null);
+   const [currentUser, setCurrentUser] = useState<User | null>(null);
+   const [creator, setCreator] = useState<User | null>(null);
+   const { user } = useSelector((state:any) => state.auth); 
 
     useEffect(()=>{
         if(id)
             contributions_service.getContribution(id).then(contrib=> setCurrentContrib(contrib));
-    },[])    
+    },[]) 
+
+    useEffect(()=>{
+        if(currentContrib){
+            setCurrentUser(user);
+             user_service.getUser(currentContrib.user_id).then(creator => setCreator(creator))
+        }
+        
+      },[currentContrib])   
 
     const dispatch = useDispatch();
     const comments = useSelector((state: any)=> state.comment.comments);
@@ -40,17 +54,17 @@ const DetailedContribution:FC  = ()=> {
             {
                 currentContrib?
                     <>
-                    <div className="contribution">
-                        <div className="contribution-text">
-                            <div className="contribution-title">
-                                <p className="c-gray"> {currentContrib?.title} </p>
+                    <div className="detailedCon">
+                        <div className="detailedCon-text">
+                            <div className="detailedCon-title">
+                                <p> {currentContrib?.title} </p>
                             </div>
-                            <div className="contribution-info">
+                            <div className="detailedCon-info">
                                 <p> {currentContrib.points} points </p>
                                 <p>by</p>
-                                <p> {currentContrib.user_id}</p> 
+                                <p><Link to={`/user/${creator?.id}`}> {creator?.full_name} </Link></p>
                                 <TimeAgo date={currentContrib.created_at}></TimeAgo>
-                                <p>discuss</p>
+                                
                             </div>
                             <p className="c-gray"> {currentContrib.text} </p> 
                         </div>

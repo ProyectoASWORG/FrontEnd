@@ -83,7 +83,7 @@ const UserForm: FC<{user: User}> = ({user}) => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td className='link' valign='top'> <Link to={`/upvotedComments`}>upvoted comments</Link></td>
+                            <td className='link' valign='top'> <Link to={`/upvotedComments/${currentUser?.id}`}>upvoted comments</Link></td>
                         </tr>
                     <tr>
                         <br></br>

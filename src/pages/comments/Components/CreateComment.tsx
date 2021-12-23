@@ -25,6 +25,7 @@ const P = styled.p`
 
         const dispatch = useDispatch();
 
+
         const currentUser = useSelector((state:any) => state.auth.user);
         const reduComments = useSelector((state: any)=> state.comment.comments);
 
@@ -62,6 +63,7 @@ const P = styled.p`
         useEffect(()=>{console.log(errors)},[errors])
     
         const onSubmit = async (e: any) =>{
+            console.log(currentUser);
             e.preventDefault();
             setErrors([]);
             let errores = [];

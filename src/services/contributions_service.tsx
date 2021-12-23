@@ -35,6 +35,12 @@ class ContributionsService {
             .catch(error => {console.log(error);})
     }
 
+    public getUserContributions = async (id:string): Promise<Contribution[]> =>{
+        return await axios.get(`${env.API_URL}/contributions/${id}/show_user.json`)
+            .then(contributions => {return contributions.data})
+            .catch(error => {console.log(error);})
+    }
+
 
     public getContribution = async (id:string): Promise<Contribution> =>{
         return await axios.get(`${env.API_URL}/contributions/${id}.json`,
