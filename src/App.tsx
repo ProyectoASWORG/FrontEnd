@@ -62,7 +62,7 @@ function App() {
                   <Route path= "/detailedCon/:id" element={<DetailedContribution/>}></Route>
                   <Route path="/reply/:id/:contributionId/:nombre/:texto/:created_at" element={<CommentReply/>}></Route>
                   <Route path="/upvotedComments/:id" element={<Comments type={FilterType.UPVOTEDCOMMENTS}/>}></Route>
-                  <Route path="/userContributions" element={<Contributions type={FilterType.UPVOTEDCONTRIBUTIONS}/>}></Route>
+                  <Route path="/userContributions" element={<Contributions type={FilterType.USERCONTRIBUTIONS}/>}></Route>
 
 
               </Routes>

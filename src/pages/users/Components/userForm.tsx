@@ -69,7 +69,7 @@ const UserForm: FC<{user: User}> = ({user}) => {
                     </tr>
                     <tr>
                             <td></td>
-                            <td className='link' valign='top'> <Link to={`/detailedCon/${currentUser?.id}`}> submissions</Link></td>
+                            <td className='link' valign='top'> <Link to={`/userContributions`}> submissions</Link></td>
                         </tr>
                         <tr>
                             <td></td>
