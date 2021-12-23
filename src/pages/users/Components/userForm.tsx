@@ -78,7 +78,7 @@ const UserForm: FC<{user: User}> = ({user}) => {
                         <tr>
                             <td></td>
                             <td className='link' valign='top'> 
-                                <Link to="/">upvoted submissions</Link>
+                                <Link to="/upvotedContributions/">upvoted submissions</Link>
                             </td>
                         </tr>
                         <tr>
