@@ -6,7 +6,7 @@ class UserService{
     public getUser = async (id: string): Promise<User> => {
         return await axios.get(`${env.API_URL}/users/${id}/show.json`)
             .then(response => response.data.user)
-            .catch(error => console.log(error));
+            .catch(error => null);
     }
 
     public updateUser = async (user: User|null) => {
@@ -16,7 +16,7 @@ class UserService{
                     localStorage.setItem("User", JSON.stringify(user));
                     return response.data.user;
                 })
-                .catch(error => console.log(error));
+                .catch(error => null);
     }
 }
 export default new UserService();
