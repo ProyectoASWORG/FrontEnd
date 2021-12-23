@@ -83,7 +83,14 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
       </div>
       <div className="contribution-text">
         <div className="contribution-title">
-          {contribution.title}
+          {contribution.contribution_type === "url"
+          ?
+            <a href={contribution.url} target="_blank" rel="noopener noreferrer">
+              {contribution.title}
+            </a>
+          :
+            <Link to={`/detailedCon/${contribution.id}`}>{contribution.title}</Link>
+          }
           {
             contribution.url?
             <p>{contribution.url}</p>
