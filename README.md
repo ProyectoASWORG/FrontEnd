@@ -15,5 +15,7 @@ Students:
 Link de la aplicación en producción: https://aswapplication.herokuapp.com
 Link de la aplicación en test: https://testaswapplication.herokuapp.com/
 
+Link del frontend de la aplicación: https://aswapplication.netlify.app/
+
 
 Link Taiga: https://tree.taiga.io/project/mymeds-asw-hackernews/timeline
