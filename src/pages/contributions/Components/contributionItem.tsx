@@ -93,7 +93,7 @@ const ContributionItem: FC<{ contribution: Contribution, index: number }> = ({ c
         <div className="contribution-info">
           <p>{contribution.points} points</p>
           <p>by</p>
-          <Link to={`/user/${creator?.id}`}>{creator?.full_name}&nbsp;</Link>
+          <p><Link to={`/user/${creator?.id}`}> {creator?.full_name} </Link></p>
           <TimeAgo date={contribution.created_at}></TimeAgo>
           {
             userVotedContribution() ?

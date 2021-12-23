@@ -22,6 +22,7 @@ import { masterReducer } from './redux/reducers';
 import Users from './pages/users/Users';
 import Comments from './pages/comments/Comments';
 import DetailedContribution from './pages/comments/DetailedContribution';
+import CommentReply from './pages/comments/Components/commentReply';
 
 const Body = styled.body`
   margin: 1em;
@@ -59,6 +60,7 @@ function App() {
                   <Route path="/user/:id" element={<Users/>}></Route>
                   <Route path="/threads/:id" element={<Comments type={FilterType.USERCOMMENTS}/>}></Route>
                   <Route path= "/detailedCon/:id" element={<DetailedContribution/>}></Route>
+                  <Route path="/reply/:id/:contributionId/:nombre/:texto/:created_at" element={<CommentReply/>}></Route>
               </Routes>
             </Container>
           </Router>

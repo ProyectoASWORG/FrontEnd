@@ -43,6 +43,11 @@ const CommentItem: FC<{ comment: Comment }> = ({ comment}) => {
         <div className="reply-link">
             <p className="font-sm">{ comment.text }</p>
         </div>
+        <div className="reply-link">
+          <p className="font-sm">
+            <Link className="c-gray" to={`/reply/${comment.id}/${comment.contribution_id}/${creator?.full_name}/${comment.text}/${comment.created_at}`}> reply </Link>
+          </p>
+        </div>
     </div>
             
       );

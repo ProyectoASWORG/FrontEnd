@@ -56,7 +56,7 @@ const DetailedContribution:FC  = ()=> {
                         </div>
                     </div> 
                     <CreateComment contributionId={`${currentContrib.id}`} replayedCommentId=''></CreateComment>
-                    <CommentsList comments={comments}></CommentsList> 
+                    <CommentsList comments={comments}></CommentsList>
                     </>
                 :
                     <></>
